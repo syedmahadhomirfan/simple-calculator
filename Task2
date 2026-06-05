@@ -1,0 +1,63 @@
+index.html code:
+<!doctype html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+    <label for="number1">Enter first number:</label>
+    <input type="number" id="InputNumber1" step="any">
+    <label for="number2">Enter second number:</label>
+    <input type="number" id="InputNumber2" step="any">
+    <label for="operation">Select operation:</label>
+    <select id="operation">
+        <option value="add">Addition</option>
+        <option value="subtract">Subtraction</option>
+        <option value="multiply">Multiplication</option>
+        <option value="divide">Division</option>
+    </select>
+    <button id="calculate" onclick="calculate()">Calculate</button>
+    <p id="result"></p>
+    <script src="script.js"></script>
+</body>
+</html>
+
+script.js code:
+function calculate() {
+    const number1Input = document.getElementById('InputNumber1');
+    const number2Input = document.getElementById('InputNumber2');
+    const operationSelect = document.getElementById('operation');
+    const resultParagraph = document.getElementById('result');
+    const number1 = parseFloat(number1Input.value);
+    const number2 = parseFloat(number2Input.value);
+    const operation = operationSelect.value;
+
+    
+if(isNaN(number1) || isNaN(number2)){
+	resultParagraph.innerText = "Please enter valid numbers";
+	return;
+}
+	switch(operation){
+		case "add":
+			resultMessage = number1 + number2;
+			break;
+		case "subtract":
+			resultMessage = number1 - number2;
+			break;
+		case "multiply":
+			resultMessage = number1 * number2;
+			break;
+		case "divide":
+			if(number2 === 0){
+				resultParagraph.innerText = "Division by zero is not allowed";
+				return;
+			}
+			resultMessage = number1/number2;
+			break;
+		default:
+			resultParagraph.innerText = "Invalid operation selected";
+	}
+    
+    resultParagraph.innerText = resultMessage;
+}
